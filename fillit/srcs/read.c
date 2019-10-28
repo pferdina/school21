@@ -6,7 +6,7 @@
 /*   By: pferdina <pferdina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 16:46:41 by pferdina          #+#    #+#             */
-/*   Updated: 2019/10/23 17:28:20 by pferdina         ###   ########.fr       */
+/*   Updated: 2019/10/28 15:21:55 by pferdina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,4 +41,5 @@ void    read_data(char *file_name)
             break ;
         }
     }
+    close(fd);
 }

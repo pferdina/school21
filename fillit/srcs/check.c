@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pferdina <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pferdina <pferdina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 16:53:02 by pferdina          #+#    #+#             */
-/*   Updated: 2019/10/25 19:37:41 by pferdina         ###   ########.fr       */
+/*   Updated: 2019/10/28 15:59:22 by pferdina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/fillit.h"
 #include "../includes/libft/libft.h"
 #include <stdio.h> //testing
-#include <stdlib.h>
 
 int     count_sharps(char *data)
 {
@@ -52,57 +51,33 @@ int     check_symbols(char *data)
     return (1);
 }
 
-point   *get_sharps(char *data)
-{
-    point   *sharps;
-    int     sharp;
-    int     i;
-
-    sharp = 0;
-    i = 0;
-    sharps = (point*)malloc(sizeof(point) * 4);
-    while (data[i])
-    {
-        if (data[i] == '#')
-        {
-            sharps[sharp].x = i % 5;
-            sharps[sharp].y = i / 5;
-            sharp++;
-        }
-        i++;
-    }
-    return (sharps);
-}
-
 int    check_tetri(char *data)
 {
     int     counter;
     int     i;
+    int     j;
     point   *sharps;
 
     i = 0;
+    j = 1;
     counter = 0;
     sharps = get_sharps(data);
-    while (i < 4)
+    while (data[i])
     {
-        if ((sharps[i].x + 1 == sharps[i + 1].x && sharps[i].y == sharps[i + 1].y) || 
-            (sharps[i].y + 1 == sharps[i + 1].y && sharps[i].x == sharps[i + 1].x))
-            counter += 2;
-        if (i == 0 && sharps[i].x + 1 == sharps [i + 3].x &&
-            sharps[i].y + 1 == sharps [i + 3].y &&
-            sharps[i + 1].x - 1 == sharps[i + 2].x && 
-            sharps[i + 1].y + 1 == sharps[i + 2].y)
-            counter += 2;
-        if ((i == 0 || i == 2) && sharps[i].x - 1 == sharps[i + 1].x &&
-            sharps[i].y + 1 == sharps[i + 1].y)
-            counter += 2;
+        if (data[i] == data[i + 1] && data[i] == '#')
+            counter++;
+        if (data[i] == data[i + 5] && data[i] == '#')
+            counter++;
         i++;
     }
     printf("%d\n", counter);
-    if (counter != 6  && counter != 8)
+    if ((counter != 3  && counter != 4))
+    {
+        save_tetri(NULL);
         return (0);
-/*    if (!save_tetri(sharps))
-        return (0); */
+    }
+    else if (!save_tetri(sharps))
+        return (0);
     return (1);
 }
 
