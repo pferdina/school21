@@ -8,7 +8,7 @@
             "type": "lldb",
             "request": "launch",
             "name": "Debug",
-            "program": "${workspaceFolder}/fillit/a.out",
+            "program": "${workspaceFolder}/a.out",
             "args": ["fillit/test.txt"],
             "cwd": "${workspaceFolder}"
         }

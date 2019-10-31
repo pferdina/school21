@@ -6,7 +6,7 @@
 /*   By: pferdina <pferdina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 19:40:10 by pferdina          #+#    #+#             */
-/*   Updated: 2019/10/28 15:52:13 by pferdina         ###   ########.fr       */
+/*   Updated: 2019/10/31 15:48:19 by pferdina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,20 +71,18 @@ tetris	*push_back(tetris *list, point *sharps)
 	return (list);
 }
 
-int		save_tetri(point *sharps)
+tetris	*save_tetri(point *sharps, tetris *list)
 {
-	static tetris	*list = NULL;
-
 	if (!sharps)
 		delete_list(list);
 	else if (!list)
 	{
 		if (!(list = create_node(list, sharps, 'A')))
-			return (0);
+			delete_list(list);
 	}
 	else
 		if (!(list = push_back(list, sharps)))
-			return (0);
+			delete_list(list);
 	print_list(list);
-	return (1);
+	return (list);
 }

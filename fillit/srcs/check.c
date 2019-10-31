@@ -6,7 +6,7 @@
 /*   By: pferdina <pferdina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 16:53:02 by pferdina          #+#    #+#             */
-/*   Updated: 2019/10/28 15:59:22 by pferdina         ###   ########.fr       */
+/*   Updated: 2019/10/31 15:50:17 by pferdina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,10 @@ int    check_tetri(char *data)
     int     counter;
     int     i;
     int     j;
-    point   *sharps;
 
     i = 0;
     j = 1;
     counter = 0;
-    sharps = get_sharps(data);
     while (data[i])
     {
         if (data[i] == data[i + 1] && data[i] == '#')
@@ -70,13 +68,7 @@ int    check_tetri(char *data)
             counter++;
         i++;
     }
-    printf("%d\n", counter);
     if ((counter != 3  && counter != 4))
-    {
-        save_tetri(NULL);
-        return (0);
-    }
-    else if (!save_tetri(sharps))
         return (0);
     return (1);
 }
