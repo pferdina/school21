@@ -10,8 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fillit.h"
-#include "../includes/libft/libft.h"
+#include "fillit.h"
 #include <stdio.h> //testing
 
 int     count_sharps(char *data)

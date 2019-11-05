@@ -1,0 +1,124 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   solve.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pferdina <pferdina@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/10/31 15:57:22 by pferdina          #+#    #+#             */
+/*   Updated: 2019/11/05 20:33:16 by pferdina         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "fillit.h"
+#include <stdio.h> //testing
+#include <stdlib.h>
+
+int		item_in_ranges(tetris *list, point *pos, int size)
+{
+	if (list->tetri[0].x + pos->x < 0 || list->tetri[0].x + pos->x >= size)
+		return (0);
+	if (list->tetri[1].x + pos->x < 0 || list->tetri[1].x + pos->x >= size)
+		return (0);
+	if (list->tetri[2].x+ pos->x < 0 || list->tetri[2].x + pos->x >= size)
+		return (0);
+	if (list->tetri[3].x + pos->x < 0 || list->tetri[3].x + pos->x >= size)
+		return (0);
+	if (list->tetri[0].y + pos->y < 0 || list->tetri[0].y + pos->y >= size)
+		return (0);
+	if (list->tetri[1].y + pos->y < 0 || list->tetri[1].y + pos->y >= size)
+		return (0);
+	if (list->tetri[2].y + pos->y < 0 || list->tetri[2].y + pos->y >= size)
+		return (0);
+	if (list->tetri[3].y + pos->y < 0 || list->tetri[3].y + pos->y >= size)
+		return (0);
+	return (1);
+}
+
+int		place_tetri(map *map, point *pos, tetris *list)
+{
+	if (!item_in_ranges(list, pos, map->size))
+		return (0);
+	if (map->map[list->tetri[0].x + pos->x][list->tetri[0].y + pos->y] != '.')
+		return (0);
+	if (map->map[list->tetri[1].x + pos->x][list->tetri[1].y + pos->y] != '.')
+		return (0);
+	if (map->map[list->tetri[2].x + pos->x][list->tetri[2].y + pos->y] != '.')
+		return (0);
+	if (map->map[list->tetri[3].x + pos->x][list->tetri[3].y + pos->y] != '.')
+		return (0);
+	map->map[list->tetri[0].x + pos->x][list->tetri[0].y + pos->y] = list->name;
+	map->map[list->tetri[1].x + pos->x][list->tetri[1].y + pos->y] = list->name;
+	map->map[list->tetri[2].x + pos->x][list->tetri[2].y + pos->y] = list->name;
+	map->map[list->tetri[3].x + pos->x][list->tetri[3].y + pos->y] = list->name;
+	return (1);
+}
+
+void    clear_last(map *map, point *pos, tetris *list)
+{
+    map->map[list->tetri[0].x + pos->x][list->tetri[0].y + pos->y] = '.';
+    map->map[list->tetri[1].x + pos->x][list->tetri[1].y + pos->y] = '.';
+    map->map[list->tetri[2].x + pos->x][list->tetri[2].y + pos->y] = '.';
+    map->map[list->tetri[3].x + pos->x][list->tetri[3].y + pos->y] = '.';
+}
+
+int     free_n_return(point *point)
+{
+    free(point);
+    return (1);
+}
+
+int    solve_map(map *map, tetris *list)
+{
+    point *pos;
+
+    if (!list)
+        return (1);
+    pos = (point*)malloc(sizeof(point));
+    pos->y = 0;
+    while (pos->y < map->size)
+    {
+        pos->x = 0;
+        while (pos->x < map->size)
+        {
+            if (place_tetri(map, pos, list))
+            {
+                if (solve_map(map, list->next))
+                    return (free_n_return(pos));
+                else
+                    clear_last(map, pos, list);
+            }
+            pos->x++;
+        }
+        pos->y++;
+    }
+    free(pos);
+    return (0);
+}
+
+int    get_solution(map *map, tetris *list)
+{
+    if (solve_map(map, list))
+    {
+        print_map(map); // testing
+        delete_map(map);
+        return (1);
+    }
+    //delete_map(map);
+    return (0);
+}  
+
+void    solve(tetris *list)
+{
+    map     *map;
+    int     size;
+
+    map = generate_map(get_map_size(list));
+    size = map->size;
+    while  (!get_solution(map, list))
+    {
+        size++;
+        delete_map(map);
+        map = generate_map(size);
+    }
+}

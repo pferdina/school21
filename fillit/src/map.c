@@ -6,12 +6,11 @@
 /*   By: pferdina <pferdina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 16:03:54 by pferdina          #+#    #+#             */
-/*   Updated: 2019/10/31 17:47:10 by pferdina         ###   ########.fr       */
+/*   Updated: 2019/11/05 20:40:22 by pferdina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fillit.h"
-#include "../includes/libft/libft.h"
+#include "fillit.h"
 #include <stdio.h> //testing
 #include <stdlib.h>
 
@@ -40,23 +39,32 @@ int     get_map_size(tetris *list)
     return (size);
 }
 
-void    delete_map(char **map)
+void    delete_map(map *map)
 {
+    int i;
+
+    i = 0;
+    while (map->map[i])
+    {
+        free(map->map[i]);
+        i++;
+    }
+    free(map);
     return ;
 }
 
-char    **fill_map(char **map, int size)
+map     *fill_map(map *map)
 {
     int i;
     int j;
 
     i = 0;
     j = 0;
-    while (i < size)
+    while (i < map->size)
     {
-        while (j < size)
+        while (j < map->size)
         {
-            map[i][j] = '.';
+            map->map[i][j] = '.';
             j++;
         }
         j = 0;
@@ -65,18 +73,18 @@ char    **fill_map(char **map, int size)
     return (map);
 }
 
-void    print_map(char **map, int size)
+void    print_map(map *map) // testing
 {
     int i;
     int j;
 
     i = 0;
     j = 0;
-    while (i < size)
+    while (i < map->size)
     {
-        while (j < size)
+        while (j < map->size)
         {
-            printf("%c", map[i][j]);
+            printf("%c", map->map[j][i]);
             j++;
         }
         j = 0;
@@ -85,26 +93,33 @@ void    print_map(char **map, int size)
     }
 }
 
-char    **generate_map(int size)
+map    *generate_map(int size)
 {
-    char    **map;
+    map     *field;
     int     i;
 
-
-    if (!(map = (char**)malloc(sizeof(char*) * (size + 1))))
+    if (!(field = (map*)malloc(sizeof(map))))
+    {
         return (NULL);
+    }
+    field->size = size;
+    if (!(field->map = (char**)malloc(sizeof(char*) * (size + 1))))
+    {
+        free(field);
+        return (NULL);
+    }
     i = 0;
-    map[size] = 0;
+    field->map[size] = 0;
     while (i < size)
     {
-        if (!(map[i] = ft_strnew(size)))
+        if (!(field->map[i] = ft_strnew(size)))
         {
-            delete_map(map);
+            delete_map(field);
             return (NULL);
         }
         i++;
     }
-    map = fill_map(map, size);
-    print_map(map, size);
-    return (map);
+    field = fill_map(field);
+   // print_map(field); //testing
+    return (field);
 }

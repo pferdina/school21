@@ -6,12 +6,11 @@
 /*   By: pferdina <pferdina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 16:46:41 by pferdina          #+#    #+#             */
-/*   Updated: 2019/10/31 15:50:17 by pferdina         ###   ########.fr       */
+/*   Updated: 2019/11/05 17:30:32 by pferdina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fillit.h"
-#include "../includes/libft/libft.h"
+#include "fillit.h"
 #include <stdio.h> //testing
 
 tetris  *read_data(char *file_name)
@@ -28,6 +27,7 @@ tetris  *read_data(char *file_name)
         return NULL;
     }
     list = NULL;
+    buffer[20] = '\0';
     while ((buff_size = read(fd, buffer, 21)))
     {
         if (buff_size < 19 || !check_data(&buffer[0]))

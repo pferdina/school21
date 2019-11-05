@@ -6,16 +6,15 @@
 /*   By: pferdina <pferdina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 19:40:10 by pferdina          #+#    #+#             */
-/*   Updated: 2019/10/31 15:48:19 by pferdina         ###   ########.fr       */
+/*   Updated: 2019/11/05 17:38:30 by pferdina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fillit.h"
-#include "../includes/libft/libft.h"
+#include "fillit.h"
 #include <stdio.h> //testing
 #include <stdlib.h>
 
-void	print_list(tetris *list)
+void	print_list(tetris *list) //tesing
 {
 	while (list)
 	{
@@ -83,6 +82,6 @@ tetris	*save_tetri(point *sharps, tetris *list)
 	else
 		if (!(list = push_back(list, sharps)))
 			delete_list(list);
-	print_list(list);
+	print_list(list); //testing
 	return (list);
 }

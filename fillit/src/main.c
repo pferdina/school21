@@ -6,12 +6,11 @@
 /*   By: pferdina <pferdina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 17:10:14 by pferdina          #+#    #+#             */
-/*   Updated: 2019/10/31 16:27:15 by pferdina         ###   ########.fr       */
+/*   Updated: 2019/11/05 19:56:30 by pferdina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/fillit.h"
-#include "../includes/libft/libft.h"
+#include "fillit.h"
 #include <stdio.h> // testing
 
 int	main(int ac, char **av)
@@ -26,5 +25,6 @@ int	main(int ac, char **av)
 	}
 	list = read_data(av[1]);
 	solve(list);
+	delete_list(list);
 	return (0);
 }

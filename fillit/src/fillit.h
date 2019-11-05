@@ -6,7 +6,7 @@
 /*   By: pferdina <pferdina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 17:35:59 by pferdina          #+#    #+#             */
-/*   Updated: 2019/10/31 16:35:48 by pferdina         ###   ########.fr       */
+/*   Updated: 2019/11/05 19:22:50 by pferdina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,13 @@
 # define FILLIT_H
 # include <fcntl.h>
 # include <unistd.h>
+# include "../libft/libft.h"
+
+typedef struct      s_map
+{
+    int             size;
+    char            **map;
+}                   map;
 
 typedef struct      s_point
 {
@@ -42,7 +49,13 @@ void	            delete_list(tetris *list);
 void	            print_list(tetris *list); //testing
 int                 count_tetris(tetris *list);
 int                 get_map_size(tetris *list);
-char                **generate_map(int size);
+map                 *generate_map(int size);
 void                solve(tetris *list);
-void                delete_map(char **map);
+void                delete_map(map *map);
+void                print_map(map *map);
+int    solve_map(map *map, tetris *list);
+int     free_n_return(point *point);
+void    clear_last(map *map, point *pos, tetris *list);
+int		place_tetri(map *map, point *pos, tetris *list);
+int		item_in_ranges(tetris *list, point *pos, int size);
 # endif
