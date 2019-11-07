@@ -15,8 +15,7 @@
 
 int	main(int ac, char **av)
 {
-	int		fd;
-	tetris	*list;
+	t_tetris	*list;
 
 	if (ac != 2)
 	{
@@ -24,6 +23,8 @@ int	main(int ac, char **av)
 		return (0);
 	}
 	list = read_data(av[1]);
+	if (!list)
+		return (0);
 	solve(list);
 	delete_list(list);
 	return (0);

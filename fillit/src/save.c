@@ -6,7 +6,7 @@
 /*   By: pferdina <pferdina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/25 19:40:10 by pferdina          #+#    #+#             */
-/*   Updated: 2019/11/05 17:38:30 by pferdina         ###   ########.fr       */
+/*   Updated: 2019/11/07 19:59:11 by pferdina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdio.h> //testing
 #include <stdlib.h>
 
-void	print_list(tetris *list) //tesing
+void	print_list(t_tetris *list) //tesing
 {
 	while (list)
 	{
@@ -24,37 +24,37 @@ void	print_list(tetris *list) //tesing
 	}
 }
 
-tetris	*create_node(tetris *list, point *sharps, char name)
+t_tetris	*create_node(t_tetris *list, t_point *sharps, char name)
 {
-		list = (tetris *)malloc(sizeof(tetris));
-		list->name = name;
-		list->next = NULL;
-		list->tetri = sharps;
+	list = (t_tetris *)malloc(sizeof(t_tetris));
+	list->name = name;
+	list->next = NULL;
+	list->tetri = sharps;
 	return (list);
 }
 
-void	delete_list(tetris *list)
+void	delete_list(t_tetris *list)
 {
-	tetris	*to_del;
+	t_tetris	*to_del;
 
-	to_del = list;
 	while (list)
 	{
+		to_del = list;
 		list = list->next;
 		free(to_del->tetri);
 		free(to_del);
-		to_del = list;
+		to_del = NULL;
 	}
 }
 
-tetris	*push_back(tetris *list, point *sharps)
+t_tetris	*push_back(t_tetris *list, t_point *sharps)
 {
-	tetris	*begin;
-	char	name;
-
+	t_tetris	*begin;
+	char		name;
+	
+	begin = list;
 	if (list && sharps)
 	{
-		begin = list;
 		name = list->name;
 		while (list->next)
 		{
@@ -62,7 +62,7 @@ tetris	*push_back(tetris *list, point *sharps)
 			name++;
 		}
 		name++;
-		list->next = create_node(list->next, sharps, name);	
+		list->next = create_node(list->next, sharps, name);
 	}
 	else
 		delete_list(list);
@@ -70,7 +70,7 @@ tetris	*push_back(tetris *list, point *sharps)
 	return (list);
 }
 
-tetris	*save_tetri(point *sharps, tetris *list)
+t_tetris	*save_tetri(t_point *sharps, t_tetris *list)
 {
 	if (!sharps)
 		delete_list(list);
@@ -79,9 +79,8 @@ tetris	*save_tetri(point *sharps, tetris *list)
 		if (!(list = create_node(list, sharps, 'A')))
 			delete_list(list);
 	}
-	else
-		if (!(list = push_back(list, sharps)))
-			delete_list(list);
-	print_list(list); //testing
+	else if (!(list = push_back(list, sharps)))
+		delete_list(list);
+//	print_list(list); //testing
 	return (list);
 }

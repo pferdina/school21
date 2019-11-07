@@ -16,46 +16,47 @@
 # include <unistd.h>
 # include "../libft/libft.h"
 
-typedef struct      s_map
+typedef struct		s_map
 {
-    int             size;
-    char            **map;
-}                   map;
+	int					size;
+	char				**map;
+}					t_map;
 
-typedef struct      s_point
+typedef struct		s_point
 {
-    int             x;
-    int             y;
-}                   point;
+	int					x;
+	int					y;
+}					t_point;
 
-typedef struct      s_tetris
+typedef struct		s_tetris
 {
-    char            name;
-    struct s_tetris *next;
-    point           *tetri;
-}                   tetris;
+	char				name;
+	struct s_tetris		*next;
+	t_point				*tetri;
+}					t_tetris;
 
-tetris              *read_data(char *file_name);
-int                 check_data(char *data);
-int                 count_sharps(char *data);
-int                 check_symbols(char *data);
-int                 check_tetri(char *data);
-tetris              *save_tetri(point *sharps, tetris *list);
-point               *get_sharps(char *data);
-point               *optimize_sharps(point *sharps);
-tetris	            *create_node(tetris *list, point *sharps, char name);
-tetris	            *push_back(tetris *list, point *sharps);
-void	            delete_list(tetris *list);
-void	            print_list(tetris *list); //testing
-int                 count_tetris(tetris *list);
-int                 get_map_size(tetris *list);
-map                 *generate_map(int size);
-void                solve(tetris *list);
-void                delete_map(map *map);
-void                print_map(map *map);
-int    solve_map(map *map, tetris *list);
-int     free_n_return(point *point);
-void    clear_last(map *map, point *pos, tetris *list);
-int		place_tetri(map *map, point *pos, tetris *list);
-int		item_in_ranges(tetris *list, point *pos, int size);
-# endif
+t_tetris			*read_data(char *file_name);
+int					check_data(char *data);
+int					count_sharps(char *data);
+int					check_symbols(char *data);
+int					check_tetri(char *data);
+t_tetris			*save_tetri(t_point *sharps, t_tetris *list);
+t_point				*get_sharps(char *data);
+t_point				*optimize_sharps(t_point *sharps);
+t_tetris			*create_node(t_tetris *list, t_point *sharps, char name);
+t_tetris			*push_back(t_tetris *list, t_point *sharps);
+void				delete_list(t_tetris *list);
+void				print_list(t_tetris *list); //testing
+int					count_tetris(t_tetris *list);
+int					get_map_size(t_tetris *list);
+t_map				*generate_map(int size);
+void				solve(t_tetris *list);
+void				delete_map(t_map *map);
+void				print_map(t_map *map);
+int					solve_map(t_map *map, t_tetris *list);
+int					free_n_return(t_point *point);
+void				clear_last(t_map *map, t_point *pos, t_tetris *list);
+int					place_tetri(t_map *map, t_point *pos, t_tetris *list);
+int					item_in_ranges(t_tetris *list, t_point *pos, int size);
+
+#endif
