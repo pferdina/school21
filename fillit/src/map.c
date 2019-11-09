@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pferdina <pferdina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pferdina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 16:03:54 by pferdina          #+#    #+#             */
-/*   Updated: 2019/11/05 20:40:22 by pferdina         ###   ########.fr       */
+/*   Updated: 2019/11/09 18:52:10 by pferdina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h> //testing
-#include <stdlib.h>
 
 int		count_tetris(t_tetris *list)
 {
@@ -73,7 +71,7 @@ t_map	*fill_map(t_map *map)
 	return (map);
 }
 
-void	print_map(t_map *map) // testing
+void	print_map(t_map *map)
 {
 	int i;
 	int j;
@@ -84,11 +82,11 @@ void	print_map(t_map *map) // testing
 	{
 		while (j < map->size)
 		{
-			printf("%c", map->map[j][i]);
+			ft_putchar(map->map[j][i]);
 			j++;
 		}
 		j = 0;
-		printf("\n");
+		ft_putendl("");
 		i++;
 	}
 }
@@ -118,6 +116,5 @@ t_map	*generate_map(int size)
 		i++;
 	}
 	field = fill_map(field);
-   // print_map(field); //testing
 	return (field);
 }

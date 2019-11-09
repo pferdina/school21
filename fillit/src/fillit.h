@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fillit.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pferdina <pferdina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pferdina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/15 17:35:59 by pferdina          #+#    #+#             */
-/*   Updated: 2019/11/05 19:22:50 by pferdina         ###   ########.fr       */
+/*   Updated: 2019/11/09 18:52:02 by pferdina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FILLIT_H
 # include <fcntl.h>
 # include <unistd.h>
+# include <stdlib.h>
 # include "../libft/libft.h"
 
 typedef struct		s_map
@@ -46,7 +47,6 @@ t_point				*optimize_sharps(t_point *sharps);
 t_tetris			*create_node(t_tetris *list, t_point *sharps, char name);
 t_tetris			*push_back(t_tetris *list, t_point *sharps);
 void				delete_list(t_tetris *list);
-void				print_list(t_tetris *list); //testing
 int					count_tetris(t_tetris *list);
 int					get_map_size(t_tetris *list);
 t_map				*generate_map(int size);

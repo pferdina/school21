@@ -46,7 +46,7 @@ $(NAME):
 	ranlib $(NAME)
 
 clean:
-	rm -rf $(OBJ)
+	rm -rf *.o
 
 fclean: clean
 	rm -rf $(NAME)

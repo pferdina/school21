@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   solve.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pferdina <pferdina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pferdina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 15:57:22 by pferdina          #+#    #+#             */
-/*   Updated: 2019/11/07 17:22:24 by pferdina         ###   ########.fr       */
+/*   Updated: 2019/11/09 18:52:12 by pferdina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h> //testing
-#include <stdlib.h>
 
 int		item_in_ranges(t_tetris *list, t_point *pos, int size)
 {
@@ -100,11 +98,10 @@ int		get_solution(t_map *map, t_tetris *list)
 {
 	if (solve_map(map, list))
 	{
-		print_map(map); // testing
+		print_map(map);
 		delete_map(map);
 		return (1);
 	}
-	//delete_map(map);
 	return (0);
 }
 

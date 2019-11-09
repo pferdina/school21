@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pferdina <pferdina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pferdina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/23 16:53:02 by pferdina          #+#    #+#             */
-/*   Updated: 2019/10/31 15:50:17 by pferdina         ###   ########.fr       */
+/*   Updated: 2019/11/09 18:52:09 by pferdina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h> //testing
 
 int		count_sharps(char *data)
 {
@@ -74,16 +73,26 @@ int		check_tetri(char *data)
 
 int		check_data(char *data)
 {
-	if (data[20] != 0)
+	char	*tmp;
+
+	tmp = ft_strdup(data);
+	if (tmp[20] != 0)
 	{
-		if (data[20] == '\n')
-			data[20] = '\0';
-		else if (data[20] != '\0')
+		if (tmp[20] == '\n')
+			tmp[20] = '\0';
+		else if (tmp[20] != '\0')
 			return (0);
 	}
-	if (!check_symbols(data))
+	if (!check_symbols(tmp))
+	{
+		free(tmp);
 		return (0);
-	if (!check_tetri(data))
+	}
+	if (!check_tetri(tmp))
+	{
+		free(tmp);
 		return (0);
+	}
+	free(tmp);
 	return (1);
 }

@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   tetri.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pferdina <pferdina@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pferdina <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/28 14:27:55 by pferdina          #+#    #+#             */
-/*   Updated: 2019/10/28 14:40:07 by pferdina         ###   ########.fr       */
+/*   Updated: 2019/11/09 18:52:13 by pferdina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fillit.h"
-#include <stdio.h> //testing
-#include <stdlib.h>
 
 t_point		*optimize_sharps(t_point *sharps)
 {
@@ -50,7 +48,7 @@ t_point		*get_sharps(char *data)
 	sharp = 0;
 	i = 0;
 	sharps = (t_point*)malloc(sizeof(t_point) * 4);
-	while (data[i])
+	while (i < 20)
 	{
 		if (data[i] == '#')
 		{
