@@ -1,0 +1,8 @@
+{
+	"files.associations": {
+		"fdf.h": "c",
+		"mlx.h": "c",
+		"libft.h": "c",
+		"wchar.h": "c"
+	}
+}
