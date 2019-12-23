@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   read_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pferdina <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pferdina <pferdina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 19:55:06 by pferdina          #+#    #+#             */
-/*   Updated: 2019/12/12 22:48:53 by pferdina         ###   ########.fr       */
+/*   Updated: 2019/12/23 19:03:50 by pferdina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int		get_y(char *file_name)
 {
 	char	*line;
-	int 	fd;
+	int		fd;
 	int		y;
 
 	fd = open(file_name, O_RDONLY, 0);
@@ -43,7 +43,7 @@ int		get_x(char *filename)
 	return (x);
 }
 
-void	fill_matrix(int	*z_line, char *line)
+void	fill_matrix(int *z_line, char *line)
 {
 	char	**nums;
 	int		i;
@@ -59,7 +59,7 @@ void	fill_matrix(int	*z_line, char *line)
 	free(nums);
 }
 
-void	read_file(char *file_name, fdf *data)
+void	read_file(char *file_name, t_fdf *data)
 {
 	int		fd;
 	char	*line;
@@ -75,7 +75,7 @@ void	read_file(char *file_name, fdf *data)
 		data->z[i] = (int*)malloc(sizeof(int) * (data->x + 1));
 		i++;
 	}
-	fd = open (file_name, O_RDONLY, 0);
+	fd = open(file_name, O_RDONLY, 0);
 	i = 0;
 	while (get_next_line(fd, &line))
 	{

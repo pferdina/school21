@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pferdina <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pferdina <pferdina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 22:50:13 by pferdina          #+#    #+#             */
-/*   Updated: 2019/12/23 02:48:50 by pferdina         ###   ########.fr       */
+/*   Updated: 2019/12/23 19:03:51 by pferdina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,35 +20,29 @@ void	isometric(float *x, float *y, int z, float angle)
 	*y = (*x + *y) * sin(angle) - z;
 }
 
-void	bresenham(float x, float y, float x1, float y1, fdf *data)
+void	bresenham(float x, float y, float x1, float y1, t_fdf *data)
 {
 	float	x_step;
 	float	y_step;
 	int		max;
-	int		z;
-	int		z1;
+	float	z;
+	float	z1;
 
-	z = data->z[(int)y][(int)x];
-	z1 = data->z[(int)y1][(int)x1];
-
-	// zooming
+	z = (float)data->z[(int)y][(int)x];
+	z1 = (float)data->z[(int)y1][(int)x1];
+	z *= data->zoom_z;
+	z1 *= data->zoom_z;
+	data->color = z || z1 ? 0xffffff : 0xe80c0c;
+	isometric(&x, &y, z, data->angle);
+	isometric(&x1, &y1, z1, data->angle);
 	x *= data->zoom;
 	x1 *= data->zoom;
 	y *= data->zoom;
 	y1 *= data->zoom;
-	z *= data->zoom_z;
-	z1 *= data->zoom_z;
-	// color
-	data->color = (z || z1) ?  0xffffff : 0xe80c0c;
-	// 3D
-	isometric(&x, &y, z, data->angle);
-	isometric(&x1, &y1, z1, data->angle);
-	//shift
 	x += data->shift_x;
 	y += data->shift_y;
 	x1 += data->shift_x;
 	y1 += data->shift_y;
-	
 	x_step = x1 - x;
 	y_step = y1 - y;
 	max = MAX(MOD(x_step), MOD(y_step));
@@ -62,7 +56,7 @@ void	bresenham(float x, float y, float x1, float y1, fdf *data)
 	}
 }
 
-void	draw(fdf *data)
+void	draw(t_fdf *data)
 {
 	int	x;
 	int	y;

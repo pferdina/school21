@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pferdina <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: pferdina <pferdina@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 19:51:13 by pferdina          #+#    #+#             */
-/*   Updated: 2019/12/23 02:47:53 by pferdina         ###   ########.fr       */
+/*   Updated: 2019/12/23 19:02:19 by pferdina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-#include "libft/libft.h"
-#include "minilibx_macos/mlx.h"
+# include "libft/libft.h"
+# include "minilibx_macos/mlx.h"
 
-typedef struct	fdf
+typedef struct	s_fdf
 {
 	int			x;
 	int			y;
@@ -26,14 +26,14 @@ typedef struct	fdf
 	int			shift_x;
 	int			shift_y;
 	float		angle;
-	int			zoom_z;
+	float		zoom_z;
 
 	void		*mlx_ptr;
 	void		*win_ptr;
-}				fdf;
+}				t_fdf;
 
-void	read_file(char *file_name, fdf *data);
-void	bresenham(float x, float y, float x1, float y1, fdf *data);
-void	draw(fdf *data);
+void			read_file(char *file_name, t_fdf *data);
+void			bresenham(float x, float y, float x1, float y1, t_fdf *data);
+void			draw(t_fdf *data);
 
 #endif
