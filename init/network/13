@@ -1,0 +1,2 @@
+for OUT in $(sh 12); do nslookup $OUT | awk '/name/ {print $4}'; done
+hostname

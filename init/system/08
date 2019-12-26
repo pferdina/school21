@@ -1,0 +1,2 @@
+#/etc/.ssh/authorized_keys
+cat /etc/.ssh/authorized_keys

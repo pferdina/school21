@@ -1,0 +1,5 @@
+#edit /etc/hostname current_name -> new_name
+#save and close
+#edit /etc/hosts current_name -> new_name
+#save and close
+#reboot

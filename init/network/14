@@ -1,0 +1,2 @@
+# /private/etc/hosts
+cat /private/etc/hosts
